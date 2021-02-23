@@ -7,8 +7,8 @@
 |--------------------|-----------------| ------------------------------|
 | first_name         | string          | null: false                   |
 | last_name          | string          | null: false                   |
-| first_name kana    | string          | null: false                   |
-| last_name kana     | string          | null: false                   |
+| first_name_kana    | string          | null: false                   |
+| last_name_kana     | string          | null: false                   |
 | nickname           | string          | null: false                   |
 | email              | string          | null: false , uniqueness: true|
 | encrypted_password | string          | null: false                   |
@@ -17,7 +17,7 @@
 ### Association
 
 - has_many :items
-- has_many :purchase
+- has_many :purchases
 - 
 
 ## items テーブル 
@@ -44,7 +44,6 @@
 | Column             | Type            | Options          |
 |--------------------|-----------------| ---------------- |
 | item               | references      | foreign key:true |
-| address            | references      | foreign key:true |
 | user               | references      | foreign key:true |
 
 ### Association
@@ -60,7 +59,7 @@
 | postal_code        | string          | null: false      |
 | prefecture_id      | integer         | null: false      |
 | municipality       | string          | null: false      |
-| address            | integer         | null: false      |
+| address            | string          | null: false      |
 | building           | stting          | null: false      |
 | phone_number       | string          | null: false      |
 | purchase           | references      | foreign key:true |
