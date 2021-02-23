@@ -17,7 +17,8 @@
 ### Association
 
 - has_many :items
-- has_one : purchase
+- has_many :purchase
+- 
 
 ## items テーブル 
 
@@ -29,19 +30,30 @@
 | status_id          | integer         | null: false      |
 | category_id        | integer         | null: false      |
 | delivery_fee_id    | integer         | null: false      |
-| delivery_days_id   | integer         | null: false      |
-| shipping area      | integer         | null: false      |
+| delivery_day_id    | integer         | null: false      |
+| prefecture_id      | integer         | null: false      |
 | user               | references      | foreign key:true |
-
 
 ### Association
 
 - belongs_to :user
-- has_one :purchase
-- has_one :delivery
-
+- has_one : purchase
 
 ## purchase テーブル
+
+| Column             | Type            | Options          |
+|--------------------|-----------------| ---------------- |
+| item               | references      | foreign key:true |
+| address            | references      | foreign key:true |
+| user               | references      | foreign key:true |
+
+### Association
+
+- has_one :address
+- belongs_to :item
+- belongs_to :user
+
+## address テーブル
 
 | Column             | Type            | Options          |
 |--------------------|-----------------| -----------------|
@@ -49,24 +61,11 @@
 | prefecture_id      | integer         | null: false      |
 | municipality       | string          | null: false      |
 | address            | integer         | null: false      |
-| phone_number       | integer         | null: false      |
-| items_id           | references      | foreign key:true |
-
-### Association
-
-- belongs_to :item
-- belongs_to :user
-- has_one :delivery
-
-
-## delivery テーブル
-
-| Column             | Type            | Options          |
-|--------------------|-----------------| ---------------- |
-| user               | references      | foreign key:true |
+| building           | stting          | null: false      |
+| phone_number       | string          | null: false      |
 | purchase           | references      | foreign key:true |
 
 ### Association
 
 - belongs_to :purchase
-- belongs_to :item
+
