@@ -8,7 +8,7 @@ FactoryBot.define do
     nickname         {Gimei.first.katakana}
     birthday         {"1990-12-12"}
     email            {Faker::Internet.free_email}
-    password         {Faker::Internet.password(min_length: 6, max_length: 20)}
+    password         { "hoge12" }
     password_confirmation { password }
   end
 end
