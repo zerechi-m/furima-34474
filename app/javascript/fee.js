@@ -3,9 +3,10 @@ function fee() {
   price.addEventListener("input", ()=>{
     const sales_commission = document.getElementById("add-tax-price")
     const sales_profit = document.getElementById("profit")
-    // debugger
-    sales_commission.innerHTML = price.value * 0.1;
-    sales_profit.innerHTML = price.value * 0.9;
+    const commission = Math.floor(price.value * 0.1)
+    const profit = Math.floor(price.value * 0.9)
+    sales_commission.innerHTML = commission;
+    sales_profit.innerHTML = profit;
   });
 };
 
