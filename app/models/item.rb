@@ -8,7 +8,9 @@ class Item < ApplicationRecord
     validates :delivery_day_id
     validates :prefecture_id
     validates :user
+    validates :image
   end
 
+  validates :price, presence: true, inclusion: {in: (300..9,999,999)}, format: { with: /\A(?=.*?[0-9])+\Z/}
   has_one_attached :image
 end
