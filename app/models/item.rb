@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :category
   belongs_to :status
-  belongs_to :deriveryfee
+  belongs_to :deliveryfee
   belongs_to :deliveryday
 
   with_options presence: true do
@@ -11,20 +11,20 @@ class Item < ApplicationRecord
     validates :describe
     validates :status_id
     validates :category_id
-    validates :delivery_fee_id
-    validates :delivery_day_id
+    validates :deliveryfee_id
+    validates :deliveryday_id
     validates :prefecture_id
-    validates :user
+    validates :user_id
     validates :image
     validates :price
   end
 
   with_options numericality: { other_than: 1 } do
-    validates :perfecture_id
+    validates :prefecture_id
     validates :category_id
     validates :status_id
-    validates :delivery_fee_id
-    validates :delivery_day_id
+    validates :deliveryfee_id
+    validates :deliveryday_id
   end
 
   validates :price, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
