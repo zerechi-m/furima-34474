@@ -1,4 +1,7 @@
 class Item < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :perfecture
+
   with_options presence: true do
     validates :name
     validates :describe
@@ -11,6 +14,7 @@ class Item < ApplicationRecord
     validates :image
   end
 
+  validates :perfecture_id, numericality: { other_than: 1 }
   validates :price, presence: true, inclusion: {in: (300..9,999,999)}, format: { with: /\A(?=.*?[0-9])+\Z/}
   has_one_attached :image
 end
