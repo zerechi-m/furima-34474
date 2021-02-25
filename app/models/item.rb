@@ -16,6 +16,7 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :user
     validates :image
+    validates :price
   end
  
   with_options numericality: { other_than: 1 } do
@@ -25,7 +26,7 @@ class Item < ApplicationRecord
     validates :delivery_fee_id
     validates :delivery_day_id
   end
-  
-  # validates :price, presence: true, inclusion: {in: 300..9,999,999}, format: { with: /\A[0-9])+\Z/}
+
+  validates :price, inclusion: {in: 300..9999999}, format: { with: /\A[0-9]+\z/ }
   has_one_attached :image
 end
