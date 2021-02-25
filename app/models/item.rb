@@ -18,7 +18,7 @@ class Item < ApplicationRecord
     validates :image
     validates :price
   end
- 
+
   with_options numericality: { other_than: 1 } do
     validates :perfecture_id
     validates :category_id
@@ -27,6 +27,6 @@ class Item < ApplicationRecord
     validates :delivery_day_id
   end
 
-  validates :price, inclusion: {in: 300..9999999}, format: { with: /\A[0-9]+\z/ }
+  validates :price, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
   has_one_attached :image
 end
