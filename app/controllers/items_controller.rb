@@ -30,13 +30,12 @@ class ItemsController < ApplicationController
   end
 
   def update
-
+    
   end
 
   private
 
   def purchase_params
-    params.require(:item).permit(:name, :price, :describe, :image, :status_id, :category_id, :deliveryfee_id, :deliveryday_id,
-                                 :prefecture_id).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :price, :describe, :image, :status_id, :category_id, :deliveryfee_id, :deliveryday_id,:prefecture_id).merge(user_id: current_user.id)
   end
 end
