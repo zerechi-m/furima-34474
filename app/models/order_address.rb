@@ -5,7 +5,6 @@ class OrderAddress
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :order_id
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}+\z/, message: "is invalid. Include hyphen(-)"}
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank"}
     validates :municipality
@@ -15,7 +14,7 @@ class OrderAddress
 
    def save
       order = Order.create(item_id: item_id, user_id: user_id)
-      Address.create(postal_code: postal_code, prefecture_id: prefecture_id, municipality: municipality , address: address, building: building, order_id: order.id)
+      Address.create(postal_code: postal_code, prefecture_id: prefecture_id, municipality: municipality , address: address, building: building, phone_number: phone_number, order_id: order.id)
    end
 
 end
