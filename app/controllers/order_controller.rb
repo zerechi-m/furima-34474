@@ -3,12 +3,12 @@ class OrderController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
-    @order = Order.new
+    @order_address = OrderAddress.new
   end
 
   def create
     binding.pry
-    @order_address = OrderAddress(order_params)
+    @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
       @order_address.save
       redirect_to root_path
@@ -19,6 +19,6 @@ class OrderController < ApplicationController
 
   private
   def order_params
-    params.require(:order_address).permit().merge(user_id: current_user[:id], item_id: params[:item_id])
+    params.require(:order_address).permit(:postal_code, :prefecture_id, :municipality, :address, :building, :phone_number, :item_id).merge(user_id: current_user[:id])
   end
 end
