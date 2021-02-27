@@ -21,4 +21,6 @@ class User < ApplicationRecord
 
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
   validates :password, format: { with: VALID_PASSWORD_REGEX, message: 'passwordには半角英数字混合で入力してください' }
+  has_many :order
+  has_many :item
 end
