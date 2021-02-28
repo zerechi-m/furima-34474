@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   before_action :user_match, only: [:edit, :update, :destroy]
 
   def index
-    @items = Item.all.order(id: "DESC")
+    @items = Item.all.order(id: 'DESC')
   end
 
   def new
@@ -21,11 +21,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-
   end
-  
-  def edit
 
+  def edit
+    if @item.order.present?
+      redirect_to root_path
+    end
   end
 
   def update
@@ -42,18 +43,17 @@ class ItemsController < ApplicationController
   end
 
   private
+
   def set_item
     @item = Item.find(params[:id])
   end
 
   def user_match
-    unless current_user.id == @item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_user.id == @item.user_id
   end
 
   def item_params
-    params.require(:item).permit(:name, :price, :describe, :image, :status_id, :category_id, :deliveryfee_id, :deliveryday_id,:prefecture_id).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :price, :describe, :image, :status_id, :category_id, :deliveryfee_id, :deliveryday_id,
+                                 :prefecture_id).merge(user_id: current_user.id)
   end
- 
 end
