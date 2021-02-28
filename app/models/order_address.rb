@@ -1,6 +1,6 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :postal_code, :prefecture_id, :municipality, :address, :building, :phone_number, :order_id, :item_id, :user_id,
+  attr_accessor :postal_code, :prefecture_id, :municipality, :address, :building, :phone_number, :item_id, :user_id,
                 :token
 
   with_options presence: true do
