@@ -1,10 +1,11 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]  # インスタンスの生成
-  before_action :user_match, only: [:edit, :update, :destroy]
+  before_action :user_match, only: [:edit, :update, :destroy]       # 現在のユーザと出品者の合致
+  before_action :soldout, only: [:edit, :update, :destroy]          # 商品がsoldoutかの分岐
 
   def index
-    @items = Item.all.order(id: "DESC")
+    @items = Item.all.order(id: 'DESC')
   end
 
   def new
@@ -21,9 +22,8 @@ class ItemsController < ApplicationController
   end
 
   def show
-
   end
-  
+
   def edit
 
   end
@@ -42,18 +42,23 @@ class ItemsController < ApplicationController
   end
 
   private
+
   def set_item
     @item = Item.find(params[:id])
   end
 
   def user_match
-    unless current_user.id == @item.user_id
+    redirect_to root_path unless current_user.id == @item.user_id
+  end
+
+  def soldout
+    if @item.order.present?
       redirect_to root_path
     end
   end
 
   def item_params
-    params.require(:item).permit(:name, :price, :describe, :image, :status_id, :category_id, :deliveryfee_id, :deliveryday_id,:prefecture_id).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :price, :describe, :image, :status_id, :category_id, :deliveryfee_id, :deliveryday_id,
+                                 :prefecture_id).merge(user_id: current_user.id)
   end
- 
 end

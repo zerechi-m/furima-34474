@@ -1,3 +1,4 @@
+
 function fee() {
   const price = document.getElementById("item-price");
   price.addEventListener("input", ()=>{
@@ -10,4 +11,5 @@ function fee() {
   });
 };
 
-window.addEventListener("load", fee);
+if (document.URL.match( /new/ ) || document.URL.match( /edit/ )) {
+window.addEventListener("load", fee);}
